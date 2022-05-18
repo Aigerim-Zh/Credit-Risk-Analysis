@@ -29,14 +29,13 @@ Credit risk data has an obvious class imbalance as there are many more good appl
 3. The data is split into training and testing sets (75% and 25%, respectively).
 4. The data is resampled. 
 5. ```LogisticRegression()``` binary classifier is applied to make predictions.
-6.  The model's performance is evaluated using appropriate metrics. 
-
-```imbalanced-learn``` and ```scikit-learn``` libraries were used to build and evaluate models using resampling. 
+6.  The model's performance is evaluated using appropriate metrics. The ```imbalanced-learn``` and ```scikit-learn``` libraries were used to build and evaluate models using resampling. 
 
 ### Deliverable 1
 I will oversample data using the Naive Random Oversampling ```RandomOverSampler``` and ```SMOTE``` algorithms. 
 
 **Model 1. Naive Random Oversampling**
+
 In random oversampling, instances of the minority class are randomly selected and added to the training set until the majority and minority classes are balanced.  
 
 * **Balanced Accuracy Score**: 0.65
@@ -50,9 +49,10 @@ In random oversampling, instances of the minority class are randomly selected an
 ![](https://github.com/Aigerim-Zh/Credit-Risk-Analysis/blob/main/Results/Naive_Random_Oversampling_Results.png)
 
 **Model 2. SMOTE Oversampling**
+
 In SMOTE, like naive random oversampling, the size of the minority is increased. The key difference with random oversampling is how the minority class is increased in size. 
 
-However, un SMOTE, new instances are interpolated. That is, for an instance from the minority class, new values are generated based on its distance from its neighbors.
+However, in SMOTE, new instances are interpolated. That is, for an instance from the minority class, new values are generated based on its distance from its neighbors.
 
 **Random oversampling draws from existing observations, whereas SMOTE generates synthetic observations**.
 
@@ -67,6 +67,7 @@ However, un SMOTE, new instances are interpolated. That is, for an instance from
 ![](https://github.com/Aigerim-Zh/Credit-Risk-Analysis/blob/main/Results/SMOTE_Results.png)
 
 **Model 3. ClusterCentroids Undersampling**
+
 Akin to SMOTE, the algorithm identifies clusters of the majority class, then generates synthetic data points, called centroids, that are representative of the clusters. The majority class is then undersampled down to the size of the minority class. 
 
 * **Balanced Accuracy Score**: 0.52
@@ -81,12 +82,14 @@ Akin to SMOTE, the algorithm identifies clusters of the majority class, then gen
 
 
 ### Deliverable 2
+
 **Model 4. SMOTEENN Combinational Approach of Over- and Undersampling** 
+
 A downside of oversampling with SMOTE is its reliance on the immediate neighbors of a data point. Because the algorithm doesn't see the overall distribution of data, the new data it creates can be heavily influenced by outliers. 
 
 A downside of undersampling is that it involves loss of data and is not an option when the dataset is small. 
 
-**SMOTEEN** combines the SMOTE and Edited Nearest Neighbors (ENN) algorithms. It includes the following steps: 
+SMOTEEN combines the SMOTE and Edited Nearest Neighbors (ENN) algorithms. It includes the following steps: 
 1. Oversample the minority class with SMOTE.
 2. Clean the resulting data with an undersampling strategy. If the two of the nearest neighbors of a data point belong to different classes, the data point is dropped.
 
@@ -130,6 +133,7 @@ A random forest model combines many decision trees into a forest of trees. Rando
 
 
 **Model 6. Easy Ensemble AdaBoost Classifier**
+
 In AdaBoost, a model is trained and then evaluated. After evaluating the errors of the first model, another model is trained. 
 
 The model gives extra weight to the errors from the previous model. The purpose of this weighting is to minimize similar errors in subsequent models. Then, the errors from the second model are given extra weight for the third model. This process is repeated until the error rate is minimized.
